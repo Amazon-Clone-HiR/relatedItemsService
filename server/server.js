@@ -9,9 +9,9 @@ const save = require("../database/main").save;
 const find = require("../database/main").find;
 
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static("./client/dist"));
 
-app.get("/", (req, res) => {
+app.get("/find", (req, res) => {
   console.log("hey I am going to the homepage!");
   find((err, stuff) => {
     if (err) {
@@ -23,15 +23,15 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/save", (req, res) => {
-  console.log("hey I am going to the homepage!");
-  save({
-    id: 1,
-    name: "this is my tester!",
-    image: "https://s3.us-east-2.amazonaws.com/recpictures/guitardood.jpg"
-  });
-  res.send("hitting the save button!");
-});
+// app.get("/save", (req, res) => {
+//   console.log("hey I am going to the homepage!");
+//   save({
+//     id: 1,
+//     name: "this is my tester!",
+//     image: "https://s3.us-east-2.amazonaws.com/recpictures/guitardood.jpg"
+//   });
+//   res.send("hitting the save button!");
+// });
 
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
