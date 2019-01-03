@@ -11,11 +11,12 @@ const find = require("../database/main").find;
 app.use(morgan("dev"));
 app.use(express.static("./client/dist"));
 
-app.get("/find", (req, res) => {
-  console.log("hey I am going to the homepage!");
-  find((err, stuff) => {
+app.get('/find/:id', (req, res) => {
+  console.log("hey I am going to find shit!", req.params.id);
+  find(req.params.id, (err, stuff) => {
     if (err) {
       console.log("error!", err);
+      res.send('err')
     } else {
       console.log("we did it!", stuff);
       res.send(stuff);
